@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { contactService } from '../services/contactService';
+import { Link } from "react-router-dom";
 
 export class ContactDetails extends Component {
    state = {
@@ -7,12 +8,22 @@ export class ContactDetails extends Component {
    }
 
    componentDidMount() {
-      this.getContact()
+      this.loadContact()
    }
 
-   async getContact() {
-      const contact = await contactService.getContactById(this.props.contactId)
+   // componentDidUpdate(prevProps, prevState) {
+   //    if (prevProps.match.params.id !== this.props.match.params.id) {
+   //       this.loadContact()
+   //    }
+   // }
+
+   async loadContact() {
+      const contact = await contactService.getContactById(this.props.match.params.id)
       this.setState({ contact })
+   }
+
+   onBack = () => {
+      this.props.history.push('/contacts')
    }
 
    render() {
@@ -23,8 +34,9 @@ export class ContactDetails extends Component {
             <h2>{contact.name}</h2>
             <p>{contact.email}</p>
             <p>{contact.phone}</p>
-            <div>
-               <button onClick={this.props.onBack}>Back</button>
+            <div className='actions'>
+               <button onClick={this.onBack}>Back</button>
+               <Link to={`/contact/edit/${contact._id}`}>Edit</Link>
             </div>
          </section>
       )

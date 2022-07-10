@@ -1,10 +1,10 @@
 import { ContactPreview } from "../cmps/ContactPreview";
 
-export function ContactList({ contacts, onSelectContact  }) {
+export function ContactList({ contacts  }) {
    return (
       <section className="contact-list simple-cards-grid">
                {contacts.map(contact =>
-                  <ContactPreview onSelectContact={onSelectContact} key={contact._id} contact={contact} />
+                  <ContactPreview key={contact._id} contact={contact} />
                )}
       </section>
    )

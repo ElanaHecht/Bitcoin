@@ -1,13 +1,12 @@
 import { Component } from 'react';
 import { contactService } from '../services/contactService';
 import { ContactList } from "../cmps/ContactList";
-import { ContactDetails } from "./ContactDetails";
 import { ContactFilter } from '../cmps/ContactFilter';
+import { Link } from 'react-router-dom'
 
 export class ContactPage extends Component {
    state = {
       contacts: null,
-      selectedContactId: null,
       filterBy: null
    }
 
@@ -20,27 +19,18 @@ export class ContactPage extends Component {
       this.setState({ contacts })
    }
 
-   onSelectContact = (contactId) => {
-      console.log('contact Id:', contactId);
-      this.setState({ selectedContactId: contactId })
-   }
-
    onChangeFilter = (filterBy) => {
       this.setState({ filterBy }, this.loadContacts)
    }
 
    render() {
-      const { contacts, selectedContactId} = this.state
+      const { contacts} = this.state
       if (!contacts) return <div>Loading...</div>
       return (
-         <section className="contact-page">{
-            selectedContactId ? 
-            <ContactDetails contactId={selectedContactId} onBack={() => this.onSelectContact(null)}/> :
-            <>
+         <section className="contact-page">
             <ContactFilter onChangeFilter={this.onChangeFilter}/>
-            <ContactList contacts={contacts} onSelectContact={this.onSelectContact}/>
-            </>
-            }
+            <ContactList contacts={contacts}/>
+            <Link className="add-btn" to="/contact/edit">Add contact</Link>
          </section>
       )
    }

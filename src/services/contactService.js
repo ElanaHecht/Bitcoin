@@ -140,8 +140,7 @@ export const contactService =  {
  }
  
  function getContacts(filterBy = null) {
-  console.log('filterBy:', filterBy);
-  
+
    return new Promise((resolve, reject) => {
      let contactsToReturn = contacts;
      if (filterBy && filterBy.term) {
