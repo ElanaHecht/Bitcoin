@@ -2,11 +2,9 @@
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import './assets/scss/global.scss'
 import { AppHeader } from './cmps/AppHeader'
-import { ContactEdit } from './pages/ContactEdit'
-import { ContactDetails } from './pages/ContactDetails'
-import { StatisticsPage } from './pages/StatisticsPage'
-import { ContactPage } from './pages/ContactPage'
-import { HomePage } from './pages/HomePage'
+import { ToDoEdit } from './pages/ToDoEdit'
+import { ToDoDetails } from './pages/ToDoDetails'
+import { ToDoApp } from './pages/ToDoApp'
 
 function App() {
   return (
@@ -15,11 +13,9 @@ function App() {
         <AppHeader />
         <main className="container">
           <Switch>
-            <Route path='/contact/edit/:id?' component={ContactEdit} />
-            <Route path='/contact/:id' component={ContactDetails} />
-            <Route path="/statistics" component={StatisticsPage} />
-            <Route path="/contact" component={ContactPage} />
-            <Route path="/" component={HomePage} />
+            <Route path='/todo/edit/:id?' component={ToDoEdit} />
+            <Route path='/todo/:id' component={ToDoDetails} />
+            <Route path="/todo" component={ToDoApp} />
           </Switch>
         </main>
         <footer className="app-footer">

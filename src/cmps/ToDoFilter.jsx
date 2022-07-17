@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export class ContactFilter extends Component {
+export class ToDoFilter extends Component {
 
         state = {
             term: ''
@@ -17,9 +17,9 @@ export class ContactFilter extends Component {
         render() {
             const {term} = this.state;
         return (
-            <section className="contact-filter" >
+            <section className="todo-filter" >
                 <label htmlFor="term">
-                    Search Contacts
+                    Search ToDos
                     <input type="search" onChange={this.handleChange} name="term" id="term" value={term}/>
                 </label>
             </section>
