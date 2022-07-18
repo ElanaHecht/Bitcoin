@@ -29,7 +29,7 @@ export function toDoReducer(state = INITIAL_STATE, action) {
       case 'SET_FILTER_BY':
          return {
             ...state,
-            filterBy: state.filterBy
+            filterBy: {...action.filterBy}
          };
 
       default:

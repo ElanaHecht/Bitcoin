@@ -10,15 +10,39 @@
 @import "basics/base";
 @import "basics/helpers";
 @import "basics/layout";
-@import "basics/animations";
 
 // Pages
+@import "pages/todo-app";
 
 
 // Components
 @import "cmps/todo-preview";
+@import "cmps/todo-filter";
 
 
+
+
+//Footer
+.app {
+   min-height: 100vh;
+   position: relative;
+
+   main.container {
+       padding-bottom: 150px;
+   }
+
+    .app-footer {
+        background-color: #021c45;
+        color: white;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        .container {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
 
 
 

@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toDoService } from '../services/toDoService';
 
@@ -7,25 +7,16 @@ export class ToDoEdit extends Component {
       toDo: null
    }
 
-   inputRef = createRef()
-
    async componentDidMount() {
       const toDoId = this.props.match.params.id
-      const toDo = toDoId ? await toDoService.getToDoById(toDoId) : toDoService.getEmptyToDo()
-        this.setState({ toDo }, ()=>{
-            this.inputRef.current.focus()
-        })
+      const toDo = toDoId ? await toDoService.getById(toDoId) : toDoService.getEmptyToDo()
+      this.setState({toDo})
    }
 
    onSaveToDo = async (ev) => {
       ev.preventDefault()
-      await toDoService.saveToDo({ ...this.state.toDo })
-      this.props.history.push('/todo')
-   }
-
-   onRemoveToDo = async () => {
-      await toDoService.deleteToDo(this.state.toDo.id)
-      this.props.history.push('/todo')
+      await toDoService.save({ ...this.state.toDo })
+      this.props.history.push('/')
    }
 
    handleChange = async ({target}) => {
@@ -33,6 +24,10 @@ export class ToDoEdit extends Component {
       const value = target.type === 'number' ? (+target.value || '') : target.value;
       this.setState(prevState => ({ toDo: { ...prevState.toDo, [field]: value } }))
    }
+
+   inputRef = (elInput) => {
+      if (elInput) elInput.focus()
+  }
 
    render() {
       const { toDo } = this.state
@@ -42,15 +37,14 @@ export class ToDoEdit extends Component {
             <h1>{toDo.id ? 'Edit' : 'Add'} ToDo</h1>
             <form onSubmit={this.onSaveToDo}>
                <label htmlFor="text">
-                  <input ref={this.inputRef} onChange={this.handleChange} type="text" id="text" name="text" value={toDo.name} required />
+                  <input ref={this.inputRef} onChange={this.handleChange} type="text" id="text" name="text" value={toDo.txt} required />
                </label>
                <label htmlFor="date">
-                  <input onChange={this.handleChange} type="date" id="date" name="date" value={toDo.email} required />
+                  <input onChange={this.handleChange} type="date" id="date" name="date" value={toDo.date} />
                </label>
                <button>Save</button>
             </form>
-            <Link to="/todo">Back</Link>
-            {toDo.id && <button onClick={this.onRemoveToDo}>Delete</button>}
+            <Link to="/">Back</Link>
          </section>
       )
    }

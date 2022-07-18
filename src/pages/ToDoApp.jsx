@@ -1,19 +1,23 @@
 import { Component } from 'react';
 import { ToDoList } from '../cmps/ToDoList';
 import { ToDoFilter } from '../cmps/ToDoFilter';
-import { loadToDos, setFilterBy } from '../store/actions/toDoActions';
+import { loadToDos, removeToDo, setFilterBy } from '../store/actions/toDoActions';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 class _ToDoApp extends Component {
 
-   async componentDidMount() {
-      this.props.loadToDos();     
+   async componentDidMount() {      
+      this.props.loadToDos();    
    }
 
    onChangeFilter = async (filterBy) => {
       await this.props.setFilterBy(filterBy);
       this.props.loadToDos();
    };
+
+   onRemoveToDo = async (toDoId) => {
+      this.props.removeToDo(toDoId)
+  }
 
    render() {
       const { toDos } = this.props
@@ -22,7 +26,7 @@ class _ToDoApp extends Component {
          <section className="todo-app">
             <ToDoFilter onChangeFilter={this.onChangeFilter} />
             <Link className="add-btn" to="/todo/edit">Add toDo</Link>
-            <ToDoList toDos={toDos} />
+            <ToDoList onRemoveToDo={this.onRemoveToDo} toDos={toDos} />
          </section>
       )
    }
@@ -35,7 +39,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-   loadTodos,
+   loadToDos,
+   removeToDo,
    setFilterBy
 }
 
