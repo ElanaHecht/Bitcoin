@@ -85,24 +85,6 @@
     @include aspect-ratio(4, 3);
 }
 
-// Buttons
-.simple-btn {
-    border: none;
-    border-radius: 25px;
-    color: $clr1;
-    font-size: 1.3em;
-    font-family: Quicksand-SemiBold, sans-serif;
-    background: $gradient;
-
-    &:hover {
-        background: linear-gradient(to right, rgb(189, 107, 240), rgb(94, 150, 240));
-    }
-}
-
-.medium-button {
-    font-size: 1.5rem;
-}
-
 // Transitions
 .fast-trans {
     transition: 0.25s all;

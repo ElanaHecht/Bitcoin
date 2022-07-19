@@ -1,0 +1,13 @@
+.nice-button {
+   border: none;
+   border-radius: 25px;
+   color: $clr1;
+   font-size: 1.3em;
+   font-family: Quicksand-SemiBold, sans-serif;
+   background: $gradient;
+   padding: 10px 25px 12px 25px;
+
+   &:hover {
+       background: linear-gradient(to right, rgb(189, 107, 240), rgb(94, 150, 240));
+   }
+}

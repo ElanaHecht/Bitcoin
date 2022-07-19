@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { toDoService } from '../services/toDoService';
+import { NiceButton } from "../cmps/NiceButton";
 import { Link } from "react-router-dom";
 
 export class ToDoDetails extends Component {
@@ -29,7 +30,7 @@ export class ToDoDetails extends Component {
             <p>{toDo.date}</p>
             <div className='actions'>
                <button className='simple-btn' onClick={this.onBack}>Back</button>
-               <Link className='simple-btn' to={`/todo/edit/${toDo.id}`}>Edit</Link>
+               <NiceButton><Link className='simple-btn' to={`/todo/edit/${toDo.id}`}>Edit</Link></NiceButton>
             </div>
          </section>
       )

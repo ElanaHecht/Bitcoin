@@ -100,9 +100,11 @@ function getEmptyToDo() {
 }
 
 function filter(filterBy) {
+  console.log('filterBy:', filterBy);
+  
   let currToDos = [...toDos]
   if (filterBy.status) {
-    switch (filterBy) {
+    switch (filterBy.status) {
       case 'active':
         currToDos = toDos.filter(toDo => !toDo.isComplete);
         break;
@@ -115,9 +117,9 @@ function filter(filterBy) {
     return currToDos
   }
   if (filterBy.term) {
-    filterBy = filterBy.toLocaleLowerCase()
+    filterBy.term = filterBy.term.toLocaleLowerCase()
     return currToDos.filter(toDo => {
-      return toDo.txt.toLocaleLowerCase().includes(filterBy)
+      return toDo.txt.toLocaleLowerCase().includes(filterBy.term)
     })
   }
 }
