@@ -1,8 +1,6 @@
 export function NiceButton({ children, ...restOfProps }) {
-   console.log('children:', children)
-
    return (
-       <button {...restOfProps}>
+       <button {...restOfProps} className="nice-button">
            {' '}
            {children}
        </button>

@@ -1,6 +1,7 @@
 import { ToDoPreview } from "./ToDoPreview";
 
 export function ToDoList({ toDos, onRemoveToDo, onCompleteToDo }) {
+
    return (
       <section className="todo-list">
                {toDos.map(toDo =>

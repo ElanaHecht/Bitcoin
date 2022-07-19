@@ -67,10 +67,17 @@
     text-align: left;
 }
 
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+
 .center-block {
     display: block;
     margin: 0 auto;
 }
+
 
 // Media helpers
 .square-ratio {

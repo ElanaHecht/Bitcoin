@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { NiceButton } from '../cmps/NiceButton';
 import { toDoService } from '../services/toDoService';
 
 export class ToDoEdit extends Component {
@@ -18,6 +19,8 @@ export class ToDoEdit extends Component {
    handleChange = async ({ target }) => {
       const field = target.name
       const value = target.type === 'number' ? (+target.value || '') : target.value
+      console.log('target.value:', target.value);
+
       this.setState(prevState => ({ toDo: { ...prevState.toDo, [field]: value } }))
    }
 
@@ -38,23 +41,28 @@ export class ToDoEdit extends Component {
 
    render() {
       const { toDo } = this.state
-   if(!toDo) return<div>Loading...</div>
+      const month = new Date().getMonth() + 1
+      const dateNow = `${new Date().getFullYear()}-${(month > 10) ? month : '0' + month}-${new Date().getDate()}`
+
+      if (!toDo) return <div>Loading...</div>
       return (
-   <section className="todo-edit">
-      <h1>{toDo.id ? 'Edit' : 'Add'} ToDo</h1>
-      <div className="form-container">
-         <form onSubmit={this.onSaveToDo}>
-            <label htmlFor="text">
-               <input ref={this.inputRef} onChange={this.handleChange} type="text" id="txt" name="txt" value={toDo.txt} required />
-            </label>
-            <label htmlFor="date">
-               <input onChange={this.handleChange} type="date" id="date" name="date" value={toDo.date} />
-            </label>
-            <button>Save</button>
-         </form>
-      </div>
-      <Link to="/">Back</Link>
-   </section>
-)
+         <section className="todo-edit">
+            <h1>{toDo.id ? 'Edit' : 'Add'} ToDo</h1>
+            <div className="form-container">
+               <form onSubmit={this.onSaveToDo}>
+                  <label htmlFor="text">
+                     <input ref={this.inputRef} onChange={this.handleChange} type="text" id="txt" name="txt" value={toDo.txt} placeholder="Type toDo here" required />
+                  </label>
+                  <label htmlFor="date">
+                     <input className={toDo.date} onChange={this.handleChange} type="date" id="date" name="date" value={toDo.date} min={dateNow} required />
+                  </label>
+                  <div className='edit-actions flex justify-center'>
+                     <NiceButton>Save</NiceButton>
+                     <Link to="/" className='nice-button'>Back</Link>
+                  </div>
+               </form>
+            </div>
+         </section>
+      )
    }
 }

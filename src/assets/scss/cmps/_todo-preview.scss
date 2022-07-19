@@ -12,6 +12,10 @@
       border-bottom: none;
    }
 
+   h2 {
+      max-width: 800px;
+   }
+
    .todo-card {
       margin-left: 10px;
       gap: 30px;
@@ -37,6 +41,13 @@
    .text-strike {
       color: $clr5;
       text-decoration: line-through;
+      background-color: transparent !important;
+   }
+
+   .over-due {
+      background-color: #eea9c0;
+      padding: 0 5px;
+      width: max-content;
    }
 
    .not-due {

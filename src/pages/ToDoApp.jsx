@@ -1,9 +1,8 @@
 import { Component } from 'react';
 import { ToDoList } from '../cmps/ToDoList';
 import { ToDoFilter } from '../cmps/ToDoFilter';
-import { NiceButton } from '../cmps/NiceButton';
+import { ListHeader } from '../cmps/ListHeader';
 import { loadToDos, removeToDo, updateToDo, setFilterBy } from '../store/actions/toDoActions';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class _ToDoApp extends Component {
@@ -20,14 +19,6 @@ class _ToDoApp extends Component {
       await this.props.setFilterBy(filterBy);
       this.props.loadToDos();
    };
-
-   handleChange = ({ target }) => {
-      const field = target.name
-      const value = target.value
-      this.setState({ [field]: value }, () => {
-         this.onChangeFilter(this.state)
-      })
-   }
 
    onRemoveToDo = async (toDoId) => {
       this.props.removeToDo(toDoId)
@@ -52,27 +43,7 @@ class _ToDoApp extends Component {
             <h1>ToDo List</h1>
             <ToDoFilter onChangeFilter={this.onChangeFilter} />
             <main>
-               <div className="todo-extras flex align-center space-between">
-                  <NiceButton className="nice-button" title="Add a new toDo"><Link to="/todo/edit">Add toDo</Link></NiceButton>
-                  <div className="radio-btn" title="Select an option to filter toDo list">
-                     <label htmlFor="all">
-                        <input onChange={this.handleChange} type="radio" name="status" id="all" value="all" />
-                        All</label>
-                     <label htmlFor="active">
-                        <input onChange={this.handleChange} type="radio" name="status" id="active" value="active" />
-                        Active</label>
-                     <label htmlFor="complete">
-                        <input onChange={this.handleChange} type="radio" name="status" id="complete" value="complete" />
-                        Complete</label>
-                  </div>
-                  <NiceButton className="nice-button" onClick={() => { this.onRemoveComplete() }} title="Remove all completed toDos">Clear complete</NiceButton>
-                  {/* <div className="sort-todos">
-                     <select name="sort" id="sort">
-                        <option value="Text">Text</option>
-                        <option value="DueDate">Due date</option>
-                     </select>
-                  </div> */}
-               </div>
+               <ListHeader onRemoveComplete={this.onRemoveComplete} onChangeFilter={this.onChangeFilter}/>
                <ToDoList onRemoveToDo={this.onRemoveToDo} onCompleteToDo={this.onCompleteToDo} toDos={toDos} />
             </main>
          </section>

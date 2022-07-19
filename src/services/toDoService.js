@@ -9,70 +9,68 @@ export const toDoService = {
 
 
 const STORAGE_KEY = 'toDoDB'
-const toDos = [
+const gDefaultToDos = [
   {
-    id: "5a56640269f443a5d64b32ca",
+    id: "5a5664025f",
     txt: "Learn about toDo lists",
     isComplete: false,
     createdAt: 1658058949000,
-    date: 1657858949000
+    date: '2022-07-16'
   },
   {
-    id: "5a5664025f6ae9aa24a99fde",
+    id: "5a5664026f",
     txt: "Create toDo list",
     isComplete: false,
     createdAt: 1658058949000,
-    date: 1657972549000
+    date: '2022-07-17'
   },
   {
-    id: "5a56640252d6acddd183d319",
+    id: "5a5664027f",
     txt: "Design toDo list",
     isComplete: false,
     createdAt: 1658058949000,
-    date: 1658058949000
+    date: '2022-07-26'
   }
 ];
 
-function sort(arr) {
-  return arr.sort((a, b) => a.createdAt - b.createdAt)
-}
+const gToDos = _loadToDos()
 
 function query(filterBy) {
   return new Promise((resolve, reject) => {
-    let toDosToReturn = storageService.load(STORAGE_KEY) || toDos;
+    let toDosToReturn = gToDos;
     if (!storageService.load(STORAGE_KEY)) storageService.store(STORAGE_KEY, toDosToReturn)
     if (filterBy) {
-      toDosToReturn = filter(filterBy)
+      toDosToReturn = _filter(filterBy)
     }
-    resolve(sort(toDosToReturn))
+    resolve(toDosToReturn)
   })
 }
 
 function getById(id) {
   return new Promise((resolve, reject) => {
-    const toDo = toDos.find(toDo => toDo.id === id)
+    const toDo = gToDos.find(toDo => toDo.id === id)
     toDo ? resolve(toDo) : reject(`ToDo id ${id} not found!`)
   })
 }
 
 function remove(id) {
   return new Promise((resolve, reject) => {
-    const index = toDos.findIndex(toDo => toDo.id === id)
+    const index = gToDos.findIndex(toDo => toDo.id === id)
     if (index !== -1) {
-      toDos.splice(index, 1)
+      gToDos.splice(index, 1)
     }
-    storageService.store(STORAGE_KEY, toDos);
-    resolve(toDos)
+    storageService.store(STORAGE_KEY, gToDos);
+    resolve(gToDos)
   })
 }
 
 function _update(toDo) {
   return new Promise((resolve, reject) => {
-    const index = toDos.findIndex(c => toDo.id === c.id)
+    const index = gToDos.findIndex(c => toDo.id === c.id)
     if (index !== -1) {
-      toDos[index] = toDo
+      gToDos[index] = toDo
     }
-    storageService.store(STORAGE_KEY, toDos)
+    storageService.store(STORAGE_KEY, gToDos)
     resolve(toDo)
   })
 }
@@ -80,8 +78,8 @@ function _update(toDo) {
 function _add(toDo) {
   return new Promise((resolve, reject) => {
     toDo.id = _makeId()
-    toDos.push(toDo)
-    storageService.store(STORAGE_KEY, toDos)
+    gToDos.push(toDo)
+    storageService.store(STORAGE_KEY, gToDos)
     resolve(toDo)
   })
 }
@@ -99,20 +97,25 @@ function getEmptyToDo() {
   }
 }
 
-function filter(filterBy) {
-  console.log('filterBy:', filterBy);
-  
-  let currToDos = [...toDos]
+function _loadToDos() {
+  let toDos = storageService.load(STORAGE_KEY)
+  if (!toDos || !toDos.length) toDos = gDefaultToDos
+  storageService.store(STORAGE_KEY, toDos)
+  return toDos
+}
+
+function _filter(filterBy) {
+  let currToDos = [...gToDos]
   if (filterBy.status) {
     switch (filterBy.status) {
       case 'active':
-        currToDos = toDos.filter(toDo => !toDo.isComplete);
+        currToDos = gToDos.filter(toDo => !toDo.isComplete);
         break;
       case 'complete':
-        currToDos = toDos.filter(toDo => toDo.isComplete);
+        currToDos = gToDos.filter(toDo => toDo.isComplete);
         break;
       default:
-        currToDos = toDos;
+        currToDos = gToDos;
     }
     return currToDos
   }
@@ -121,6 +124,24 @@ function filter(filterBy) {
     return currToDos.filter(toDo => {
       return toDo.txt.toLocaleLowerCase().includes(filterBy.term)
     })
+  }else {
+    return currToDos
+  }
+  // if (filterBy.sort) {
+  //   return _sort(gToDos, filterBy.sort)
+  // }
+}
+
+function _sort(arr, sortBy) {
+  switch (sortBy) {
+    case 'Title':
+      return arr.sort((a, b) => a.txt.localeCompare(b.txt))
+    case 'DueDate':
+      return arr.sort((a, b) => a.date - b.date)
+    case 'Created':
+      return arr.sort((a, b) => a.createdAt - b.createdAt)
+    default:
+      return arr.sort((a, b) => a.createdAt - b.createdAt)
   }
 }
 

@@ -5,7 +5,9 @@
    font-size: 1.3em;
    font-family: Quicksand-SemiBold, sans-serif;
    background: $gradient;
+   min-width: 200px;
    padding: 10px 25px 12px 25px;
+   text-align: center;
 
    &:hover {
        background: linear-gradient(to right, rgb(189, 107, 240), rgb(94, 150, 240));

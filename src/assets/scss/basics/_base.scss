@@ -29,7 +29,7 @@ h5,
 h6,
 p {
   margin: 0;
-  font-family: Quicksand-Regular, sans-serif;
+  font-family: Quicksand-SemiBold, sans-serif;
   letter-spacing: 1px;
   padding: 0;
 }
@@ -54,4 +54,15 @@ button {
 input {
   font-family: inherit;
   text-align: inherit;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 50px white inset !important;
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }

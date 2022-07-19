@@ -1,0 +1,38 @@
+.list-header {
+   margin-top: rem(20px);
+   padding: rem(30px);
+   background-color: $clr1;
+   border-radius: 5px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+   .radio-btn {
+      font-size: 1.1em;
+      font-family: Quicksand-SemiBold, sans-serif;
+
+      input {
+         display: none;
+      }
+
+      input:checked+label{
+         color: $clr4;
+      }
+
+      label {
+         cursor: pointer;
+         display: inline-block;
+         padding: 0 20px;
+         border-left: 1px solid $clr4;
+
+         &:first-child {
+            border: transparent;
+         }
+
+         &:hover {
+            color: $clr4;
+         }
+      }
+   }
+   .clear-btn {
+      padding: 5px 10px 7px 10px;
+   }
+}
