@@ -125,22 +125,7 @@ function _filter(filterBy) {
       return toDo.txt.toLocaleLowerCase().includes(filterBy.term)
     })
   }
-  if (filterBy.sort) {
-    return _sort(gToDos, filterBy.sort)
-  }
-}
 
-function _sort(arr, sortBy) {
-  
-  switch (sortBy) {
-    case 'Title':
-      arr = arr.sort((a, b) => a.txt.localeCompare(b.txt))
-      break;
-    case 'Created':
-      arr = arr.sort((a, b) => a.createdAt - b.createdAt)
-      break;
-  }
-  return arr
 }
 
 

@@ -16,7 +16,7 @@ class _ToDoApp extends Component {
    }
 
    onChangeFilter = async (filterBy) => {
-      await this.props.setFilterBy(filterBy);
+      await this.props.setFilterBy(filterBy);  
       this.props.loadToDos();
    };
 

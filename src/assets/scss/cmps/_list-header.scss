@@ -51,32 +51,6 @@
       }
    }
 
-   .sort-todos {
-      p {
-         font-size: 1.1rem;
-
-         @include for-wide-layout {
-            font-size: 1rem;
-         }
-
-         @include for-wide-layout {
-            font-size: 1.1rem;
-         }
-         
-      }
-      select#sort {
-         cursor: pointer;
-         font-family: Quicksand-SemiBold, sans-serif;
-         font-size: 1rem;
-         margin-left: 5px;
-         padding: 2px;
-
-         @include for-wide-layout {
-            font-size: 0.9rem;
-         }
-      }
-   }
-
    .clear-btn {
       padding: 5px 10px 7px 10px;
    }

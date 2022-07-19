@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 export class ListHeader extends Component {
 
     state = {
-        status: '',
-        sort: 'Created'
+        status: ''
     }
 
     handleChange = ({ target }) => {
@@ -19,7 +18,6 @@ export class ListHeader extends Component {
     }
 
     render() {
-        const { sort } = this.state
         return (
             <section className="list-header flex align-center space-between">
                 <Link to="/todo/edit" className="nice-button" title="Add a new toDo">Add toDo</Link>
@@ -33,13 +31,6 @@ export class ListHeader extends Component {
                     <label htmlFor="complete">
                         <input onChange={this.handleChange} type="radio" name="status" id="complete" value="complete" />
                         Complete</label>
-                </div>
-                <div className="sort-todos flex align-center space-between">
-                    <p>Sort by:</p>
-                    <select onChange={this.handleChange} value={sort} name="sort" id="sort">
-                        <option value="Created">Created</option>
-                        <option value="Title">Title</option>
-                    </select>
                 </div>
                 <NiceButton onClick={this.props.onRemoveComplete} title="Remove all completed toDos">Clear complete</NiceButton>
             </section>

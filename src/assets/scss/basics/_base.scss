@@ -12,8 +12,8 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Quicksand-Regular, sans-serif;
-  background: linear-gradient(to right, rgba(178, 80, 239, 0.7), rgba(64, 134, 246, 0.7)), url("../../images/background.jpg");
-  background-size: 100vw rem(400px);
+  background-image: url("../../images/background.jpg");
+  background-size: 100vw cover;
   background-repeat: no-repeat;
 }
 
