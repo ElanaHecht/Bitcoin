@@ -26,7 +26,7 @@ export function toDoReducer(state = INITIAL_STATE, action) {
             ...state,
             toDos: state.toDos.filter(toDo => toDo.id !== action.toDoId)
          };
-      case 'SET_FILTER_BY':
+      case 'SET_FILTER_BY':        
          return {
             ...state,
             filterBy: {...action.filterBy}

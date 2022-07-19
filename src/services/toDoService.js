@@ -28,7 +28,7 @@ const toDos = [
     id: "5a56640252d6acddd183d319",
     txt: "Design toDo list",
     isComplete: false,
-    createdAt:1658058949000,
+    createdAt: 1658058949000,
     date: 1658058949000
   }
 ];
@@ -37,12 +37,12 @@ function sort(arr) {
   return arr.sort((a, b) => a.createdAt - b.createdAt)
 }
 
-function query(filterBy = null) {
+function query(filterBy) {
   return new Promise((resolve, reject) => {
     let toDosToReturn = storageService.load(STORAGE_KEY) || toDos;
     if (!storageService.load(STORAGE_KEY)) storageService.store(STORAGE_KEY, toDosToReturn)
-    if (filterBy && filterBy.term) {
-      toDosToReturn = filter(filterBy.term)
+    if (filterBy) {
+      toDosToReturn = filter(filterBy)
     }
     resolve(sort(toDosToReturn))
   })
@@ -99,11 +99,27 @@ function getEmptyToDo() {
   }
 }
 
-function filter(term) {
-  term = term.toLocaleLowerCase()
-  return toDos.filter(toDo => {
-    return toDo.txt.toLocaleLowerCase().includes(term)
-  })
+function filter(filterBy) {
+  let currToDos = [...toDos]
+  if (filterBy.status) {
+    switch (filterBy) {
+      case 'active':
+        currToDos = toDos.filter(toDo => !toDo.isComplete);
+        break;
+      case 'complete':
+        currToDos = toDos.filter(toDo => toDo.isComplete);
+        break;
+      default:
+        currToDos = toDos;
+    }
+    return currToDos
+  }
+  if (filterBy.term) {
+    filterBy = filterBy.toLocaleLowerCase()
+    return currToDos.filter(toDo => {
+      return toDo.txt.toLocaleLowerCase().includes(filterBy)
+    })
+  }
 }
 
 

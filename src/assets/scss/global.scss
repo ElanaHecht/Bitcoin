@@ -13,6 +13,7 @@
 
 // Pages
 @import "pages/todo-app";
+@import "pages/todo-edit";
 
 
 // Components
@@ -33,7 +34,7 @@
 
     .app-footer {
         background-color: #021c45;
-        color: white;
+        color: $clr1;
         width: 100%;
         position: absolute;
         bottom: 0;

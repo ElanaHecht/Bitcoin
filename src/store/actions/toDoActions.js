@@ -24,8 +24,24 @@ export function removeToDo(toDoId) {
     }
 }
 
+export function updateToDo(toDo) {
+    return async (dispatch) => {
+        try {
+            await toDoService.save(toDo)
+            dispatch({ type: 'UPDATE_TODO', toDo })
+        } catch (err) {
+            console.log('err:', err)
+        }
+    }
+}
+
 export function setFilterBy(filterBy) {
     return async (dispatch) => {
-        dispatch({ type: 'SET_FILTER_BY', filterBy })
+        try {
+            await toDoService.query(filterBy)
+            dispatch({ type: 'SET_FILTER_BY', filterBy })
+        } catch (err) {
+            console.log('err:', err)
+        }
     }
 }

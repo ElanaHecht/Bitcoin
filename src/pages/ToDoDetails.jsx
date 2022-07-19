@@ -28,8 +28,8 @@ export class ToDoDetails extends Component {
             <h2>{toDo.txt}</h2>
             <p>{toDo.date}</p>
             <div className='actions'>
-               <button onClick={this.onBack}>Back</button>
-               <Link to={`/todo/edit/${toDo.id}`}>Edit</Link>
+               <button className='simple-btn' onClick={this.onBack}>Back</button>
+               <Link className='simple-btn' to={`/todo/edit/${toDo.id}`}>Edit</Link>
             </div>
          </section>
       )

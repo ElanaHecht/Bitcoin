@@ -1,5 +1,65 @@
 .todo-preview {
-   background-color: $clr3;
-   color: $clr5;
+   background-color: $clr1;
+   color: $clr2;
    cursor: pointer;
+   border-bottom: 1px solid $clr3;
+
+   &:first-child {
+      border-radius: 5px 5px 0 0;
+   }
+   &:last-child {
+      border-radius: 5px;
+      border-bottom: none;
+   }
+
+   .todo-card {
+      margin-left: 10px;
+      gap: 30px;
+
+      button {
+         height: 40px;
+         width: 40px;
+         border-radius: 20px;
+         border: 1px solid $clr5;
+         background-color: transparent;
+
+         &:hover {
+            border: 1px solid $clr4;
+         }
+      }
+   }
+
+   .complete {
+      background: $gradient;
+      border: none;
+   }
+
+   .text-strike {
+      color: $clr5;
+      text-decoration: line-through;
+   }
+
+   .not-due {
+      display: none;
+   }
+
+   .todo-actions {
+      button {
+         height: 40px;
+         width: 40px;
+         background-color: transparent;
+         color: $clr5;
+         border: none;
+         font-size: 1.5rem;
+         font-family: Quicksand-Regular, sans-serif;
+
+         &:hover {
+            font-family: Quicksand-SemiBold, sans-serif;
+            color: $clr2;
+         }
+      }
+      .edit-icon:hover {
+         fill: $clr4;
+      }
+   }
 }

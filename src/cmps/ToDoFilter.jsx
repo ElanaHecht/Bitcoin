@@ -1,27 +1,31 @@
 import { Component } from 'react';
+import { ReactComponent as SearchIcon } from '../assets/images/search.svg'
 
 export class ToDoFilter extends Component {
 
-        state = {
-            term: ''
-        }
+    state = {
+        term: ''
+    }
 
-        handleChange = ({ target }) => {
-            const field = target.name
-            const value = target.value
-            this.setState({ [field]: value }, () => {
-              this.props.onChangeFilter(this.state)  
-            })
-        }
+    handleChange = ({ target }) => {
+        const field = target.name
+        const value = target.value
+        console.log('field:', field);
+        console.log('value:', value);
+        
+        this.setState({ [field]: value }, () => {
+            this.props.onChangeFilter(this.state)
+        })
+    }
 
-        render() {
-            const {term} = this.state;
+    render() {
+        const { term } = this.state;
         return (
-            <section className="todo-filter" >
+            <section className="todo-filter" title="Search toDos by title">
                 <label htmlFor="term">
-                    Search ToDos
-                    <input type="search" onChange={this.handleChange} name="term" id="term" value={term}/>
+                    <SearchIcon className='search-icon' />
                 </label>
+                <input type="search" onChange={this.handleChange} name="term" id="term" value={term} />
             </section>
         )
     }

@@ -1,10 +1,10 @@
 import { ToDoPreview } from "./ToDoPreview";
 
-export function ToDoList({ toDos, onRemoveToDo }) {
+export function ToDoList({ toDos, onRemoveToDo, onCompleteToDo }) {
    return (
-      <section className="todo-list simple-cards-grid">
+      <section className="todo-list">
                {toDos.map(toDo =>
-                  <ToDoPreview onRemoveToDo={onRemoveToDo} key={toDo.id} toDo={toDo} />
+                  <ToDoPreview onRemoveToDo={onRemoveToDo}  onCompleteToDo={onCompleteToDo} key={toDo.id} toDo={toDo} />
                )}
       </section>
    )
