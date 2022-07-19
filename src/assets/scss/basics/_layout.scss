@@ -7,7 +7,7 @@
 
 
     @include for-mobile-layout {
-        max-width: initial;
+        max-width: $mobile-breakpoint;
     }
 
     @include for-tablet-layout {

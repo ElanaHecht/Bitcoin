@@ -34,12 +34,11 @@ export class ListHeader extends Component {
                         <input onChange={this.handleChange} type="radio" name="status" id="complete" value="complete" />
                         Complete</label>
                 </div>
-                <div className="sort-todos">
-                    Sort by:
+                <div className="sort-todos flex align-center space-between">
+                    <p>Sort by:</p>
                     <select onChange={this.handleChange} value={sort} name="sort" id="sort">
-                        <option value="Title">Title</option>
-                        <option value="DueDate">Due date</option>
                         <option value="Created">Created</option>
+                        <option value="Title">Title</option>
                     </select>
                 </div>
                 <NiceButton onClick={this.props.onRemoveComplete} title="Remove all completed toDos">Clear complete</NiceButton>

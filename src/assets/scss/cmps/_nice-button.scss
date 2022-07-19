@@ -9,6 +9,18 @@
    padding: 10px 25px 12px 25px;
    text-align: center;
 
+   @include for-wide-layout {
+    padding: 5px 10px 6px 10px;
+    min-width: 160px;
+         font-size: 1em;
+      }
+
+   @include for-mobile-layout {
+    min-width: 200px;
+   padding: 10px 25px 12px 25px;
+         font-size: 1.3em;
+      }
+
    &:hover {
        background: linear-gradient(to right, rgb(189, 107, 240), rgb(94, 150, 240));
    }

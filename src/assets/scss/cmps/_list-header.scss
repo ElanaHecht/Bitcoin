@@ -5,15 +5,33 @@
    border-radius: 5px;
    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 
+   @include for-tablet-layout {
+      flex-wrap: wrap;
+      row-gap: 10px;
+   }
+
+   @include for-mobile-layout {
+      flex-direction: column;
+      row-gap: 20px;
+   }
+
    .radio-btn {
       font-size: 1.1em;
       font-family: Quicksand-SemiBold, sans-serif;
+
+      @include for-wide-layout {
+         font-size: 1em;
+      }
+
+      @include for-mobile-layout {
+         font-size: 1.1em;
+      }
 
       input {
          display: none;
       }
 
-      input:checked+label{
+      input:checked + label {
          color: $clr4;
       }
 
@@ -32,6 +50,33 @@
          }
       }
    }
+
+   .sort-todos {
+      p {
+         font-size: 1.1rem;
+
+         @include for-wide-layout {
+            font-size: 1rem;
+         }
+
+         @include for-wide-layout {
+            font-size: 1.1rem;
+         }
+         
+      }
+      select#sort {
+         cursor: pointer;
+         font-family: Quicksand-SemiBold, sans-serif;
+         font-size: 1rem;
+         margin-left: 5px;
+         padding: 2px;
+
+         @include for-wide-layout {
+            font-size: 0.9rem;
+         }
+      }
+   }
+
    .clear-btn {
       padding: 5px 10px 7px 10px;
    }

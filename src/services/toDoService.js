@@ -124,25 +124,23 @@ function _filter(filterBy) {
     return currToDos.filter(toDo => {
       return toDo.txt.toLocaleLowerCase().includes(filterBy.term)
     })
-  }else {
-    return currToDos
   }
-  // if (filterBy.sort) {
-  //   return _sort(gToDos, filterBy.sort)
-  // }
+  if (filterBy.sort) {
+    return _sort(gToDos, filterBy.sort)
+  }
 }
 
 function _sort(arr, sortBy) {
+  
   switch (sortBy) {
     case 'Title':
-      return arr.sort((a, b) => a.txt.localeCompare(b.txt))
-    case 'DueDate':
-      return arr.sort((a, b) => a.date - b.date)
+      arr = arr.sort((a, b) => a.txt.localeCompare(b.txt))
+      break;
     case 'Created':
-      return arr.sort((a, b) => a.createdAt - b.createdAt)
-    default:
-      return arr.sort((a, b) => a.createdAt - b.createdAt)
+      arr = arr.sort((a, b) => a.createdAt - b.createdAt)
+      break;
   }
+  return arr
 }
 
 
